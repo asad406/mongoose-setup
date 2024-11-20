@@ -16,6 +16,14 @@ const userNameSchema = new Schema<UserName>({
   middleName: {
     type: String,
     trim:true, // trim delete white space 
+    required:true,
+    validate: {
+      validator: function(value){
+        const lastNameStr = value.charAt(0).toUpperCase() + value.slice(1)
+        return lastNameStr === value
+      },
+      message: '{VALUE} is not in capitalize format.'
+    }
 
   },
   lastName: {
